@@ -16,4 +16,4 @@ crypto.randomBytes(64, (err,buf)=>{
     console.log('pbkdf2로 생성한 비밀번호: ',key.toString('base64'));
     console.timeEnd('비번 만드는데 걸린 시간')
   }); //암호키 만들때 1초 정도 나오도록 중간 정수 사이즈를 정한다
-});
+}); //콜백지옥이다! promise로 바꾸는건 util에서.. 
