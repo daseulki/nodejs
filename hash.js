@@ -11,9 +11,9 @@ console.log('sha512로 생성한 비밀번호: ',crypto.createHash('sha512').upd
 crypto.randomBytes(64, (err,buf)=>{
   const salt = buf.toString('base64');
   console.log('salt: ', salt);
-  console.time('makePassword')
+  console.time('비번 만드는데 걸린 시간')
   crypto.pbkdf2('비밀번호', salt, 550745, 64, 'sha512', (err,key)=>{
     console.log('pbkdf2로 생성한 비밀번호: ',key.toString('base64'));
-    console.timeEnd('makePassword')
+    console.timeEnd('비번 만드는데 걸린 시간')
   }); //암호키 만들때 1초 정도 나오도록 중간 정수 사이즈를 정한다
 });
