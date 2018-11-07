@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+  <style>
+  body{ text-align: center;}
+  .gameBox{ height: 80px;}
+  button{
+    height: 50px;
+    width: 50px;
+    color: white;
+    border: none;
+    font-size: 20px;
+    margin: 10px;
+    border-radius: 50%;
+  }
+  .red { background: #ff4242; }
+  .red:hover{ background: rgb(232, 0, 0);  }
+  .yellow{ background:rgb(255, 244, 92) }
+  .yellow:hover{ background: rgb(252, 211, 63);}
+  .blue{ background: rgb(84, 97, 255);}
+  .blue:hover{ background: rgb(0, 63, 226);}
+  .computerResult{ height: 100px;}
+  .computer{background: lightgrey;  }
+
+</style>
+</head>
+<body>
+  <p>
+    ~가위바위보 게임~
+  </p>
+  <div id="game" class="gameBox">
+    <button id="btnScissors" class="red"><i class="far fa-hand-peace"></i></button>
+    <button id="btnRock" class="yellow"><i class="far fa-hand-rock"></i></button>
+    <button id="btnPaper" class="blue"><i class="far fa-hand-paper"></i></button>
+  </div>
+  <p>
+    - 플레이어 vs 컴퓨터 -
+  </p>
+  <div class="computerResult">
+    <button id = "playerBtn"><i id="playerIcon" class = "fas fa-question"></i></button>
+      VS
+  <button id = "computerBtn"><i id="computerIcon" class = "fas fa-question"></i></button>
+
+    <p>
+      - 결과 -
+    </p>
+    <h2 id="result">두구두구두구!</h2>
+  </div>
+
+  <script src="event.js"></script>
+</body>
+
+</html>
