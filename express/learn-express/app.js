@@ -49,5 +49,11 @@ app.use(flash());
 
 app.use('/', indexRouter)
 
+//NOT FOUND
+app.use((req,res,next)=>{
+    res.status(404).send('NOT FOUND');
+    //express는 writeHead(404) 말고 status(404)
+});
+
 
 module.exports = app;
