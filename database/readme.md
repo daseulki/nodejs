@@ -30,6 +30,8 @@ sequelize db:create
 ```
 
 - models에 있는 파일들이 database의 테이블에 1대1 대응하게 됨 ==> 데이터를 미리 저장할 장소를 만드는 것 
+> 테이블 이름은 모델이름이 자동으로 복수형으로 바뀐 것  
+
 ```javascript
 /* user.js */
 module.exports = (sequelize, DataTypes) => {
@@ -75,3 +77,5 @@ var sequelize = require('./models').sequelize;
 //app = express() 아래 싱크시킬것.. 
 sequelize.sync();
 ```
+
+- route 설정하기 

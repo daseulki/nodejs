@@ -21,7 +21,7 @@ router.patch('/:id',(req,res,next) => {
     Comment.update({
         comment : req.body.comment,
     }, {
-        where: { id, req.params.id },
+        where: { id: req.params.id },
     })
 });
 
