@@ -1,10 +1,12 @@
 const express= require('express');
 const router = express.Router();
 
+var { User, Comment } = require('../models')
+
 router.get('/:id',(req,res,next)=>{
     Comment.findAll({
         include: {
-            model: getUser,
+            model: User,
             where: { id: req.params.id },
         }
     })  
@@ -23,10 +25,28 @@ router.patch('/:id',(req,res,next) => {
     }, {
         where: { id: req.params.id },
     })
+        .then((result) => {
+            console.log(result);
+            res.json(result);
+        })
+        .catch((err) => {
+            console.error(err);
+            next(err);
+        })
 });
 
 router.delete('/:id',(req,res,next) => {
-    Comment.destroy()
+    Comment.destroy({
+        where: { id: req.params.id },
+    })
+    .then((result) => {
+        console.log(result);
+        res.json(result);
+    })
+    .catch((err) => {
+        console.error(err);
+        next(err);
+    })
 });
 
 router.post('/',(req,res,next) => {
