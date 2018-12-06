@@ -7,6 +7,7 @@ module.exports = (passport) => {
     clientID: process.env.KAKAO_ID,
     callbackURL: '/auth/kakao/callback',
   }, async (accessToken, refreshToken, profile, done) => {
+    //token기반.. 
     try {
       const exUser = await User.find({ where: { snsId: profile.id, provider: 'kakao' } });
       if (exUser) {

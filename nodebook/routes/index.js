@@ -1,25 +1,29 @@
 const express = require('express');
+const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
+
 const router = express.Router();
+//프론트에서 오는 입력은 다 의심해야됨 
 
-router.get('/profile', (req,res, next) => {
-    res.render('profile', {title: '내 정보 - Nodebook', user: null});
+router.get('/profile', isLoggedIn, (req, res) => {
+  res.render('profile', { title: '내 정보 - NodeBook', user: req.user });
 });
 
-router.get('/join', (req,res, next) => {
-    res.render('join', {
-        title: '회원가입 - Nodebook',
-        user: null,
-        joinError: req.flash('joinError')
-    })
+router.get('/join', isNotLoggedIn, (req, res) => {
+  res.render('join', {
+    title: '회원가입 - NodeBook',
+    user: req.user,
+    joinError: req.flash('joinError'),
+  });
 });
 
-router.get('/', (req,res, next) => {
-    res.render('main', {
-        title: 'Nodebook',
-        twits: [],
-        user: null,
-        loginError: req.flash('loginError')
-    })
+router.get('/', (req, res, next) => {
+  console.log(req.user);
+  res.render('main', {
+    title: 'NodeBook',
+    twits: [],
+    user: req.user,
+    loginError: req.flash('loginError'),
+  });
 });
 
 module.exports = router;
