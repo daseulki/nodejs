@@ -1,6 +1,7 @@
 const local = require('./localStrategy');
 const kakao = require('./kakaoStrategy');
 //로컬이랑 카카오 로그인 정책도 쓸것..
+//한국어 설정 따로 해야됨 아직 안함 
 
 const { User } = require('../models');
 
