@@ -5,13 +5,13 @@ const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 const { User } = require('../models');
 
 const router = express.Router();
-
+//POST /auth/join
 router.post('/join', isNotLoggedIn, async (req, res, next) => {
   const { email, nick, password } = req.body;
   try {
     const exUser = await User.find({ where: { email } });
     if (exUser) {
-      req.flash('joinError', '이미 가입된 이메일입니다.');
+      req.flash('joinError', 'already signed in.');
       return res.redirect('/join');
     }
     const hash = await bcrypt.hash(password, 12);
@@ -26,12 +26,12 @@ router.post('/join', isNotLoggedIn, async (req, res, next) => {
     return next(error);
   }
 });
-
 //POST /auth/login
 router.post('/login', isNotLoggedIn, (req, res, next) => {
   console.log(req.body);
+
   passport.authenticate('local', (authError, user, info) => {
-    console.log(`authenticate ${user}`)
+    console.log(info);
     if (authError) {
       console.error(authError);
       return next(authError);
@@ -40,6 +40,7 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
       req.flash('loginError', info.message);
       return res.redirect('/');
     }
+    console.log(req.login(user));
     return req.login(user, (loginError) => {
       if (loginError) {
         console.error(loginError);

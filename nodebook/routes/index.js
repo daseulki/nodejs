@@ -17,7 +17,6 @@ router.get('/join', isNotLoggedIn, (req, res) => {
 });
 
 router.get('/', (req, res, next) => {
-  console.log(req.user);
   res.render('main', {
     title: 'NodeBook',
     twits: [],
