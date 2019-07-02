@@ -1,15 +1,30 @@
 ### 웹소켓 
-##양방향 실시간 통신 
+## 양방향 실시간 통신
 
+***
+
+# 모듈 필요 모듈 설치.. 
 ```shell 
-npm i connect-flash cookie-parser dotenv express express-session morgan
+npm i connect-flash cookie-parser dotenv express express-session morgan ejs
 
 npm i -D nodemon
 
 npm i ws 
 //npm i socket.io 는 나중에 어려워서.. 
 ```
-===
+# view를 그냥 html로 쓰고 싶을때 
+
+```javascript
+
+/*app.js*/
+
+app.set('views', path.join(__dirname , 'views'));
+app.engine('html', require('ejs').renderFile)
+app.set('view engine','html');
+
+```
+
+***
 
 1. HTTP와 WS 는 포트를 공유해서 따로 포트를 연결할 필요 없음 
 2. ws는 실시간 통신이라 res가 따로 없음 
