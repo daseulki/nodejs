@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>INDEX</title>
+    <script type="text/javascript">
+        var output;
+        var webSocket = new WebSocket("ws://localhost:8005");
+        function init() {
+        
+            output = document.getElementById("output")
+
+            webSocket.onopen = function () {
+                console.log('서버와 웹소켓 연결 성공')
+                writeMessage('서버와 웹소켓 연결 성공')
+            }
+            webSocket.onmessage = function(e){
+                console.log(e.data);
+                webSocket.send('클라이언트에서 서버로 답장 ')
+                writeMessage('클라이언트에서 서버로 답장 ')
+            }
+            webSocket.onclose = function (e){
+                writeMessage('연결종료')
+            }
+
+        }  
+
+        function writeMessage(message) {
+            var pre = document.createElement("p");
+            pre.style.wordWrap="break-word";
+            pre.innerHTML = message;
+            output.appendChild(pre);
+        }
+
+        window.addEventListener("load", init, false)
+    </script>
+</head>
+<body>
+    <h2>console network 탭을 확인하자 </h2>
+    <div id="output"></div>
+</body>
+</html>
