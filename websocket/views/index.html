@@ -5,9 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>INDEX</title>
-    <script type="text/javascript">
+    
+</head>
+<body>
+    <h2> console network 탭을 확인하자 </h2>
+    <div id="output"></div>
+
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript"> //////////////// web socket ////////////////////
+    /*
         var output;
         var webSocket = new WebSocket("ws://localhost:8005");
+        
         function init() {
         
             output = document.getElementById("output")
@@ -35,10 +44,37 @@
         }
 
         window.addEventListener("load", init, false)
+        */
     </script>
-</head>
-<body>
-    <h2>console network 탭을 확인하자 </h2>
-    <div id="output"></div>
+    <script type="text/javascript"> //////////////// socket.io ////////////////////   
+        var output;
+        var socket = io.connect('http://localhost:8005',{
+            path : '/socket.io',  //서버에 쓴 path와 동일해야함 
+            transports: ['websocket'],
+        });
+        
+        function init() {
+            output = document.getElementById("output")
+            socket.on('news', function(data) {
+                console.log(data);
+                socket.emit('reply','Hello Node.js');
+                writeMessage(data)
+
+            })
+            socket.on('close', function(data) {
+                console.log(data);
+                socket.emit('reply','Bye Node.js');
+                writeMessage(data)
+
+            })
+        }  
+        function writeMessage(message) {
+            var pre = document.createElement("p");
+            pre.style.wordWrap="break-word";
+            pre.innerHTML = message;
+            output.appendChild(pre);
+        }
+        window.addEventListener("load", init, false)
+    </script>
 </body>
 </html>

@@ -31,4 +31,29 @@ app.set('view engine','html');
 3.  req.headers['x-forwarded-for'] : 프록시 거치기 전의 아이피 ,
  req.connection.remoteAddress : 최종아이피 
 4. ws 상태 : ws.OPEN ws.CONNECTING, ws.CLOSING, ws.CLOSED
-5. [웹소켓참고링크](https://niceman.tistory.com/109)
+5. [웹소켓참고링크](https://niceman.tistory.com/109) ==> 클라이언트 구분하기 어렵다 
+6. [socket.io]() ==> web socket 기반으로 클라이언트 구분하는 기능까지 구현.. 
+
+
+***
+
+# Socket.io 사용하기 
+ - websocket 기반으로 클라이언트 구분이 가능.. 함 써봐.. 
+
+``` javascript 
+/* app.js */
+
+
+```
+
+``` javascript 
+/* socket.js */
+
+
+```
+
+``` javascript 
+/* index.html 내부 script로 작성했음*/
+
+
+```
