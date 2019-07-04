@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="/main.css">
+</head>
+<body>
+    <h1> chat rooms </h1>
+    <fieldset>
+        <legend> chat list </legend>
+        <table>
+            <thead>
+                <tr>
+                    <th>title</th>
+                    <td>type</td>
+                    <td>allowance</td>
+                    <td>owner</td>
+                </tr>
+            </thead>
+            <tbody>
+              
+            </tbody>
+
+        </table>
+        <a href="/room"> create room </a>
+    </fieldset>
+
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript"> 
+        var socket = io.connect('http://localhost:8005/room', {
+            path: '/socket.io'
+        });
+        socket.on('newRoom', function (data) {
+            var tr = document.createElement('tr');
+            var td = document.createElement('td');
+    
+            td.textContent = data.title;
+            tr.appendChild(td);
+            td = document.createElement('td');
+            td.textContent = data.password ? '비밀방' : '공개방';
+            tr.appendChild(td);
+            td = document.createElement('td');
+            td.textContent = data.max;
+            tr.appendChild(td);
+            td = document.createElement('td');
+            td.style.color = data.owner;
+            td.textContent = data.owner;
+            tr.appendChild(td);
+            td = document.createElement('td');
+            var button = document.createElement('button');
+            button.textContent = '입장';
+            button.dataset.password = data.password ? 'true' : 'false';
+            button.dataset.id = data._id;
+            button.addEventListener('click', addBtnEvent);
+            td.appendChild(button);
+            tr.appendChild(td);
+            tr.dataset.id = data._id;
+
+            document.querySelector('table tbody').appendChild(tr);
+        });
+
+        socket.on('removeRoom', function (data) {
+            document.querySelectorAll('tbody tr').forEach(function (tr) {
+                if (tr.dataset.id === data) {
+                tr.parentNode.removeChild(tr);
+                }
+            });
+        });
+        function addBtnEvent(e) {
+            if (e.target.dataset.password === 'true') {
+                const password = prompt('비밀번호를 입력하세요');
+                location.href = '/room/' + e.target.dataset.id + '?password=' + password;
+            } else {
+                location.href = '/room/' + e.target.dataset.id;
+            }
+        }
+        document.querySelectorAll('.join-btn').forEach(function (btn) {
+            btn.addEventListener('click', addBtnEvent);
+        });
+
+    </script>
+</body>
+</html>
