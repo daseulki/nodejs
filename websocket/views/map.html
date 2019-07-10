@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>map</title>
+      <link rel="stylesheet" href="/ds.css" type="text/css">
+      <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+      <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=017e079c31865fae9da0e60782a3af8e&libraries=services,drawing"></script>
+
+  
+    </head>
+  <body>
+    <div id="map" ></div>
+    <div class="group">
+      <select id="markerGroup" class="custom-control custom-select group-select">
+        <option value="lora" selected>LoRa</option>
+        <option value="wifi">Wifi</option>
+        <option value="ble">BLE</option>
+      </select>
+      <select id="userGroup" class="custom-control custom-select group-select">
+        <option value="default" selected>그룹 미지정</option>
+
+      </select>
+      <div>
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" id="do" class="custom-control-input" name="addcache" />
+          <label class="custom-control-label" for="do" > 광역시도</label><br />
+        </div>
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" id="sig" class="custom-control-input" name="addcache" />
+          <label class="custom-control-label" for="sig"> 시군구</label><br />
+        </div>
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" id="emd" class="custom-control-input" name="addcache" />
+          <label class="custom-control-label" for="emd"> 읍면동</label><br />
+        </div>
+      </div>
+      <div>
+          마커 개수: <span id="markerCnt"></span>
+       
+      </div>
+      <div class="row">
+        <span>반지름: </span>
+        <div class="custom-control custom-radio">
+          <input type="radio" class="custom-control-input" name="rad" id="rad500" name="groupOfDefaultRadios" value=500>
+          <label class="custom-control-label" for="rad500">500m</label>
+        </div>
+        <div class="custom-control custom-radio">
+          <input type="radio" class="custom-control-input" name="rad" id="rad1000" name="groupOfDefaultRadios" value=1000 checked>
+          <label class="custom-control-label" for="rad1000">1,000m</label>
+        </div>
+        <div class="custom-control custom-radio">
+          <input type="radio" class="custom-control-input" name="rad" id="rad2000" name="groupOfDefaultRadios" value=2000>
+          <label class="custom-control-label" for="rad2000">2,000m</label>
+        </div>
+        <div class="custom-control custom-radio">
+          <input type="radio" class="custom-control-input" name="rad" id="rad2500" name="groupOfDefaultRadios" value=2500>
+          <label class="custom-control-label" for="rad2500">2,500m</label>
+        </div>
+      </div>
+      <button id ="initAll" class = "btn">초기화</button>
+      <button id ="saveBtn" class = "btn">저장</button>
+      <button id ="loadBtn" class = "btn">불러오기</button>
+    </div>
+
+    <script type="text/javascript" src="/map.js"></script>
+  </body>
+</html>

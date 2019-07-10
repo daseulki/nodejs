@@ -18,7 +18,26 @@ router.get('/', async (req, res, next) => {
 router.get('/room', (req, res) => {
     res.render('room.html', { title: 'GIF 채팅방 생성' });
 });
+router.get('/map', (req, res) => {
+    res.render('map.html', { title: '지도' });
+});
 
+/*
+router.post('/map', async (req, res, next) => {
+    try {
+        const map = new Map({
+            lonlat: req.body.title,
+            
+        });
+        const savedMap = await map.save();
+
+
+    } catch (error) {
+      console.error(error);
+      next(error);
+    }
+});
+*/
 router.post('/room', async (req, res, next) => {
     try {
         const room = new Room({

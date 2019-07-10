@@ -76,11 +76,14 @@ const axios = require('axios');
 module.exports = (server, app, sessionMiddleware) => {
   const io = SocketIO(server, { path: '/socket.io' });
 
-  app.set('io', io);
+  app.set('io', io); //익스프레스 변수 저장 방법
+  // req.app.get('io').of('/room').emit
+  
+
   const room = io.of('/room');
   const chat = io.of('/chat');
 
-  io.use((socket, next) => {
+  io.use((socket, next) => { //익스프레스 미들웨어를 소켓IO에서 쓰는 방법
     sessionMiddleware(socket.request, socket.request.res, next);
   });
 
@@ -98,7 +101,9 @@ module.exports = (server, app, sessionMiddleware) => {
     const roomId = referer
       .split('/')[referer.split('/').length - 1]
       .replace(/\?.+/, '');
-    socket.join(roomId);
+
+    socket.join(roomId);//방에 접속
+
     socket.to(roomId).emit('join', {
       user: 'system',
       chat: `${req.session.color}님이 입장하셨습니다.`,
